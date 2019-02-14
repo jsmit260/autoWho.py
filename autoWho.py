@@ -1,13 +1,11 @@
 #!/usr/bin/python
- 
-#testing Pycurl
- 
+
 import pycurl
 from StringIO import StringIO
 import sys
 import json
 import re
-import os
+import os, sys
 import time
 import requests
 import string
@@ -16,8 +14,14 @@ buffer = StringIO()
 
 
 #1 Create a pycurl.Curl instance
- 
-uri = ('https://ipinfo.io/'+sys.argv[1])
+
+try:
+    uri = ('https://ipinfo.io/'+sys.argv[1])
+except IndexError:
+    print 'NO IP GIVEN -- USAGE:> autoWho.py 8.8.8.8'
+    sys.exit()
+
+
 #SANTIZE RFC1918 and abnormal IP entries
 if re.match(r'^((([2][5][0-5]|([2][0-4]|[1][0-9]|[0-9])?[0-9])\.){3})([2][5][0-5]|([2][0-4]|[1][0-9]|[0-9])?[0-9])$',sys.argv[1]) is None:
                 sys.exit("Invalid IPv4 format")
