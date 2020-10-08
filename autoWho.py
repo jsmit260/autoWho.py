@@ -1,7 +1,5 @@
-#!/usr/bin/python
-
 import pycurl
-from StringIO import StringIO
+import io
 import sys
 import json
 import re
@@ -10,7 +8,7 @@ import time
 import requests
 import string
  
-buffer = StringIO()
+buffer = io.StringIO()
 
 
 #1 Create a pycurl.Curl instance
@@ -18,7 +16,7 @@ buffer = StringIO()
 try:
     uri = ('https://ipinfo.io/'+sys.argv[1])
 except IndexError:
-    print 'NO IP GIVEN -- USAGE:> autoWho.py 8.8.8.8'
+    print('NO IP GIVEN -- USAGE:> autoWho.py 8.8.8.8')
     sys.exit()
 
 
@@ -40,4 +38,4 @@ def api_call():
     return r
 
 data = api_call().json()
-print '\n'+ 'IP address ' + data['ip'] + ' belongs to ' + data['org'] + ' out of ' + data['country'] + ', ' +data['region'] +'\n'
+print('\n'+ 'IP address ' + data['ip'] + ' belongs to ' + data['org'] + ' out of ' + data['country'] + ', ' +data['region'] +'\n')
